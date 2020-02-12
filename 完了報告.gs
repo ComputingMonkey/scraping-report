@@ -2,7 +2,8 @@ const sheet = SpreadsheetApp.getActiveSheet();
 var kanekosanID = '<@UTYEPRTN2>';
 var kanekosanID = '<@UL0TX44FP>';//+0あとでmyIDに変更
 //incoming webhookのURL
-const postUrl = 'https://hooks.slack.com/services/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';
+var postUrl = 'https://hooks.slack.com/services/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';
+var postUrl = 'https://hooks.slack.com/services/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';
 const username = '完了報告bot';  // 通知時に表示されるユーザー名
 const icon = ':bear:';  // 通知時に表示されるアイコン
 
@@ -39,11 +40,11 @@ function putMsg(){
     //完了日時をセット
     sheet.getRange(doneRow, 6+0).setValue(getNow());
     //メッセージを作成し、slackに送信
-    const message = worker + 'が' + company + 'のスクレイピングを終了しました\n' + kanekosanID + 'さんは確認をお願い致します';
+    const message = worker + 'さんが' + company + 'のスクレイピングを終了しました\n' + kanekosanID + 'さんは確認をお願い致します';
     reportDone(message);
     //完了した企業をslackに報告
     sheet.getRange(doneRow,5+0).setValue(reportDone(message))
-    Browser.msgBox(worker + 'が' + company + 'について完了報告しました');
+    Browser.msgBox(worker + 'さんが' + company + 'について完了報告しました');
   }else{
     Browser.msgBox('報告がキャンセルされました');
   }  
