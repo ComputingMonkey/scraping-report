@@ -1,4 +1,6 @@
+//ーーーーー+0の箇所は送信先とスプレッドシートを移行する際に変更ーーーーー
 const sheet = SpreadsheetApp.getActiveSheet();
+//金子さんのslackID
 var kanekosanID = '<@UTYEPRTN2>';
 var kanekosanID = '<@UL0TX44FP>';//+0あとでmyIDに変更
 //incoming webhookのURL
@@ -37,14 +39,14 @@ function putMsg(){
     const doneRow = getKeyRow(sheet,result,4+0);
     const company = sheet.getRange(doneRow,3+0).getValue();
     const worker = sheet.getRange(doneRow,1+0).getValue();
-    //完了日時をセット
-    sheet.getRange(doneRow, 6+0).setValue(getNow());
     //メッセージを作成し、slackに送信
     const message = worker + 'さんが' + company + 'のスクレイピングを終了しました\n' + kanekosanID + 'さんは確認をお願い致します';
     reportDone(message);
     //完了した企業をslackに報告
     sheet.getRange(doneRow,5+0).setValue(reportDone(message))
     Browser.msgBox(worker + 'さんが' + company + 'について完了報告しました');
+    //完了日時をセット
+    sheet.getRange(doneRow, 6+0).setValue(getNow());    
   }else{
     Browser.msgBox('報告がキャンセルされました');
   }  
